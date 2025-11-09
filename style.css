@@ -1,0 +1,359 @@
+/* Import a Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* Define CSS Variables */
+:root {
+    --primary-color: #6a11cb;
+    --secondary-color: #8e2de2;
+    --text-color: #333;
+    --light-gray: #f4f7f6;
+    --border-color: #e0e0e0;
+    --green: #28a745;
+    --yellow: #ffc107;
+    --red: #dc3545;
+    --white: #ffffff;
+    --pink-light: #fbe9e7;
+    --purple-light: #e0f2f7;
+}
+
+/* Global Reset & Body */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px; 
+}
+
+/* === MODIFIED BODY RULE === */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative; 
+    overflow-x: hidden; /* <-- THIS IS THE FIX (was overflow: hidden) */
+}
+
+/* Blurred Background Elements */
+body::before,
+body::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(80px); 
+    z-index: -1; 
+}
+
+body::before {
+    background: radial-gradient(circle, #ffccf9 0%, #ff98ea 100%); 
+    top: 10%;
+    left: 10%;
+}
+
+body::after {
+    background: radial-gradient(circle, #add8e6 0%, #87ceeb 100%); 
+    bottom: 10%;
+    right: 10%;
+}
+
+
+/* Main App Container */
+.app-container {
+    max-width: 650px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 25px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+header .logo {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+header p {
+    font-size: 0.95rem;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Twinkle effect for star icon */
+.twinkle {
+    animation: twinkle 1.5s infinite alternate;
+    color: gold;
+    margin-left: 5px;
+}
+@keyframes twinkle {
+    from { opacity: 0.5; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Form Container */
+.form-container {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    padding: 25px 30px;
+}
+#todo-form {
+    display: flex;
+    gap: 10px;
+}
+#todo-input {
+    flex: 1;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+#todo-form button {
+    background: #ff7e5f; 
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 0 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+#todo-form button:hover {
+    background: #e66b4d;
+    transform: translateY(-2px);
+}
+
+/* Stats Container */
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 25px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+.stat-item {
+    flex-basis: 100px;
+}
+.stat-item i {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 8px;
+}
+.stat-item .icon-total { color: var(--primary-color); }
+.stat-item .icon-active { color: var(--yellow); }
+.stat-item .icon-completed { color: var(--green); } 
+.stat-item .icon-rate { color: #e91e63; } 
+
+.stat-item span {
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: block;
+    line-height: 1.2;
+}
+.stat-item label {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Filter Container */
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    border-bottom: 1px solid var(--border-color);
+}
+.filter-buttons button {
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 6px 15px;
+    margin-right: 8px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+    transition: all 0.3s ease;
+}
+.filter-buttons button.active {
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+#clear-completed {
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    border-radius: 20px;
+    padding: 6px 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+#clear-completed:hover {
+    background: #a02030; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Task List Styles */
+.task-list-container {
+    padding: 20px 30px;
+    max-height: 300px; 
+    overflow-y: auto;
+}
+#todo-list {
+    list-style: none;
+}
+.todo-item {
+    display: flex;
+    align-items: center;
+    background: var(--light-gray);
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+}
+.todo-item:hover {
+    background-color: #f0f0f0;
+}
+
+.task-checkbox {
+    width: 20px; 
+    height: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.task-text {
+    flex: 1;
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer; 
+}
+
+/* Completed Task Styling */
+.todo-item.completed .task-text {
+    text-decoration: line-through;
+    color: #999;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    font-size: 0.85rem;
+    color: #888;
+    background-color: var(--light-gray);
+    border-top: 1px solid var(--border-color);
+}
+
+/* ================================== */
+/* == RESPONSIVE ADJUSTMENTS       == */
+/* ================================== */
+@media (max-width: 600px) {
+    html {
+        font-size: 15px;
+    }
+    
+    .app-container {
+        margin: 10px;
+        border-radius: 10px;
+        min-height: calc(100vh - 40px);
+    }
+    
+    .form-container, .stats-container, .filter-container {
+        padding: 15px 20px;
+    }
+
+    .task-list-container {
+        padding: 15px 20px;
+        max-height: none;      
+        overflow-y: visible;   
+    }
+    
+    .stats-container {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    .stat-item {
+        flex-basis: calc(50% - 10px); 
+    }
+    
+    .filter-container {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    .filter-buttons {
+        width: 100%;
+        display: flex;
+    }
+    .filter-buttons button {
+        margin-right: 0;
+        flex: 1; 
+        text-align: center;
+        margin: 0 4px;
+    }
+    #clear-completed {
+        align-self: flex-end;
+    }
+}
+
+@media (max-width: 420px) {
+    html {
+        font-size: 14px;
+    }
+
+    #todo-form {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    #todo-form button {
+        justify-content: center;
+        padding: 12px; 
+    }
+    
+    .form-container, .stats-container, .filter-container {
+        padding: 15px;
+    }
+    
+    .task-list-container {
+        padding: 15px;
+    }
+    
+    .filter-buttons {
+        gap: 5px;
+    }
+    .filter-buttons button {
+        padding: 5px 10px;
+    }
+}
